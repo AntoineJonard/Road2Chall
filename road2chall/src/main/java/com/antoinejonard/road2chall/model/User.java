@@ -9,8 +9,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    private String name;
     private String pwd;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "owners",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -21,7 +22,8 @@ public class User {
     public User() {
     }
 
-    public User(String pwd, List<Team> teams) {
+    public User(String name, String pwd, List<Team> teams) {
+        this.name = name;
         this.pwd = pwd;
         this.teams = teams;
     }
@@ -48,5 +50,13 @@ public class User {
 
     public void setTeams(List<Team> teams) {
         this.teams = teams;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
