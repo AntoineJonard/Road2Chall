@@ -1,9 +1,6 @@
 package com.antoinejonard.road2chall.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -15,6 +12,9 @@ public class Game {
     private Date date;
     private boolean win;
     private String note;
+    @ManyToOne
+    @JoinColumn(name="game_id", nullable=false)
+    private Team team;
 
     public Game() {
     }
@@ -55,5 +55,13 @@ public class Game {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

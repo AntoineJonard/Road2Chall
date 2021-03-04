@@ -11,6 +11,11 @@ public class User {
     private int id;
     private String pwd;
     @ManyToMany
+    @JoinTable(
+            name = "owners",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id")
+    )
     private List<Team> teams;
 
     public User() {

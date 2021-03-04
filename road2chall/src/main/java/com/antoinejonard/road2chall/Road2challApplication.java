@@ -10,6 +10,8 @@ public class Road2challApplication {
 	Documentation :
 		- JPA / Spring data -> Base de donnée
 		- JAX-RS / Jersey -> Webservices
+	lancement BDD :
+		- java -cp hsqldb.jar org.hsqldb.server.Server --database.1 file:road3challdb --dbname.1 road2Chall
 	 */
 
 	public static void main(String[] args) {

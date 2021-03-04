@@ -11,11 +11,13 @@ public class Team {
     private int id;
     private String name;
     private String description;
+    @ElementCollection
     private List<String> notes;
-    @ManyToMany
+    @ManyToMany(mappedBy = "teams")
     private List<User> owners;
+    @ElementCollection
     private List<String> members;
-    @OneToMany
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Game> games;
 
     public Team() {
