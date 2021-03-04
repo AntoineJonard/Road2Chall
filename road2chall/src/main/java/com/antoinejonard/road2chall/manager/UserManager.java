@@ -39,4 +39,17 @@ public class UserManager {
         userRepository.save(user);
         return Response.ok(user).build();
     }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/connexion")
+    public Response connect(@QueryParam("name") String name, @QueryParam("pwd") String pwd){
+        List<User> usersWithSameName = userRepository.findByName(name);
+        if (usersWithSameName.isEmpty())
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        User user = usersWithSameName.get(0);
+        if (user.getPwd().equals(pwd))
+            return Response.ok(user).build();
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
 }
