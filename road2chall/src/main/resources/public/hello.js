@@ -32,7 +32,8 @@ $(document).ready(function() {
 		    contentType: "application/json; charset=utf-8",
 		    dataType: "json",
 		    success: function(data){
-		    	console.log(data);
+				console.log(data);
+		    	console.log(data.id);
 		    	$('#list').append('<li id="personne-'+data.id+'" class="list-group-item">'+data.name+' '+data.pwd+' <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" >X</button></li>');
 		    }
 		});
