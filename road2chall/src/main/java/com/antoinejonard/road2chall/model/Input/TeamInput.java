@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TeamInput {
 
-    private int id;
+    private Integer id;
     private String name;
     private String description;
     private List<String> notes;

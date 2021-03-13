@@ -15,12 +15,24 @@
 
 <div class="form-group">
     <label>Nouvelle personne:</label>
-    <input type="text" name="name" id="name-input">
-    <input type="text" name="pwd" id="pwd-input">
-    <input type="button" id="addbtn" name="addbtn" value="Add" class="btn btn-primary btn-sm" />
+    <input type="text" name="name" id="nameuser-input">
+    <input type="text" name="pwd" id="pwduser-input">
+    <input type="button" id="addUserbtn" name="addbtn" value="Add" class="btn btn-primary btn-sm" />
 </div>
 
-<ul class="list-group" id="list">
+<ul class="list-group" id="list-users">
+</ul>
+
+<h1>Liste des teams</h1>
+
+<div class="form-group">
+    <label>Nouvelle team:</label>
+    <input type="text" name="name" id="nameteam-input">
+    <input type="text" name="description" id="descriptionteam-input">
+    <input type="button" id="addTeambtn" name="addbtn" value="Add" class="btn btn-primary btn-sm" />
+</div>
+
+<ul class="list-group" id="list-teams">
 </ul>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

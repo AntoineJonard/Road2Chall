@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Game {
+public class Game implements Comparable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -63,5 +63,10 @@ public class Game {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.date.compareTo(((Game)o).date);
     }
 }

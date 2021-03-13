@@ -1,7 +1,7 @@
 package com.antoinejonard.road2chall.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Team {
@@ -11,25 +11,37 @@ public class Team {
     private int id;
     private String name;
     private String description;
-    @ElementCollection
-    private List<String> notes;
-    @ManyToMany(mappedBy = "teams")
-    private List<User> owners;
-    @ElementCollection
-    private List<String> members;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> notes;
+    @ManyToMany(mappedBy = "teams", fetch = FetchType.EAGER)
+    private Set<User> owners;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> members;
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Game> games;
+    private Set<Game> games;
+    private String code;
 
     public Team() {
     }
 
-    public Team(String name, String description, List<String> notes, List<User> owners, List<String> members, List<Game> games) {
+    public Team(int id, String name, String description, Set<String> notes, Set<User> owners, Set<String> members, Set<Game> games, String code) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.notes = notes;
         this.owners = owners;
         this.members = members;
         this.games = games;
+        this.code = code;
+    }
+
+    public Team(String name, String description) {
+        this.name = name;
+        this.description = description;
+        games = new TreeSet<>();
+        members = new TreeSet<>();
+        owners = new TreeSet<>();
+        notes = new TreeSet<>();
     }
 
     public int getId() {
@@ -38,6 +50,7 @@ public class Team {
 
     public void setId(int id) {
         this.id = id;
+        this.setCode(generateCode());
     }
 
     public String getName() {
@@ -56,35 +69,47 @@ public class Team {
         this.description = description;
     }
 
-    public List<String> getNotes() {
+    public Set<String> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<String> notes) {
+    public void setNotes(Set<String> notes) {
         this.notes = notes;
     }
 
-    public List<User> getOwners() {
+    public Set<User> getOwners() {
         return owners;
     }
 
-    public void setOwners(List<User> owners) {
+    public void setOwners(Set<User> owners) {
         this.owners = owners;
     }
 
-    public List<String> getMembers() {
+    public Set<String> getMembers() {
         return members;
     }
 
-    public void setMembers(List<String> members) {
+    public void setMembers(Set<String> members) {
         this.members = members;
     }
 
-    public List<Game> getGames() {
+    public Set<Game> getGames() {
         return games;
     }
 
-    public void setGames(List<Game> games) {
+    public void setGames(Set<Game> games) {
         this.games = games;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String generateCode() {
+        return String.valueOf(Objects.hash(id, name, description));
     }
 }
