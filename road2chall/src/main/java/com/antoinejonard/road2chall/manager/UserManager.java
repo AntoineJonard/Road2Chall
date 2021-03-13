@@ -27,6 +27,14 @@ public class UserManager {
         return allUsers;
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/getTeams/users/{id}")
+    public List<Team> getUserTeams(@PathParam("id") int id){
+        Optional<User> optUser = userRepository.findById(id);
+        return optUser.map(User::getTeams).orElse(null);
+    }
+
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

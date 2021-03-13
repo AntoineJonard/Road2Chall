@@ -1,0 +1,91 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: lightgrey;
+}
+
+#connexion-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+    width: 100%;
+    background-color: darkcyan;
+    margin: 0;
+}
+
+#user-name{
+    color: white;
+    margin: 20px;
+    font-size: large;
+}
+
+#deconnexion-button{
+    margin: 20px;
+}
+
+h1{
+    margin: 15px;
+}
+
+.form-group{
+    margin: 15px;
+    padding: 15px;
+    background-color: white;
+    border: 2px solid darkcyan;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#horizontal-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#divider{
+    width: 0px;
+    height: 80px;
+    border: 1px solid grey;
+    margin: 60px;
+}
+
+.add-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.team-item{
+    width: 90%;
+    padding: 10px;
+    list-style-type: none;
+    border-bottom: 1px solid grey;
+}
+
+.team-list{
+    margin: 15px;
+    padding: 15px;
+    background-color: white;
+    border: 2px solid darkcyan;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#descriptionteam-input{
+    width: 100%;
+    height: 60px;
+}
+
+.remove-team-btn{
+    margin-left: 10px;
+}

@@ -42,6 +42,7 @@ public class Team {
         members = new TreeSet<>();
         owners = new TreeSet<>();
         notes = new TreeSet<>();
+        this.setCode(generateCode());
     }
 
     public int getId() {
@@ -50,7 +51,6 @@ public class Team {
 
     public void setId(int id) {
         this.id = id;
-        this.setCode(generateCode());
     }
 
     public String getName() {
@@ -110,6 +110,6 @@ public class Team {
     }
 
     public String generateCode() {
-        return String.valueOf(Objects.hash(id, name, description));
+        return String.valueOf(Objects.hash(name, description));
     }
 }

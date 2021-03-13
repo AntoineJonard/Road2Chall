@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 
 		$('#name-input').val('');
-		$('#pwd-input').val('');
+		$('#pwd-input') .val('');
 		return false;
 	});
 
@@ -60,7 +60,7 @@ $(document).ready(function() {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function(data){
-                $('#list-teams').append('<li id="team-'+data.id+'" class="list-group-item">'+data.name+' '+data.description+' <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" >X</button></li>');
+                $('#list-teams').append('<li id="team-'+data.id+'" class="list-group-item">'+data.name+' '+data.description+' '+data.code+'<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" >X</button></li>');
             }
         });
 

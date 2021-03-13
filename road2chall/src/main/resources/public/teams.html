@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teams</title>
+    <link href="teams.css" rel="stylesheet">
+</head>
+<body>
+<div id="connexion-bar">
+    <p id="user-name"></p>
+    <button id="deconnexion-button">Deconnexion</button>
+</div>
+
+<h1>Mes equipes</h1>
+
+<div class="form-group">
+    <h2>Ajouter une équipe</h2>
+    <div id="horizontal-box">
+        <div class="add-box">
+            <h3>Créer une équipe</h3>
+            <label for="nameteam-input">Nom : </label><input type="text" name="name" id="nameteam-input">
+            <label for="descriptionteam-input">Description : </label><textarea maxlength="300" name="description" id="descriptionteam-input"></textarea>
+            <input type="button" id="add-team-btn" name="addbtn" value="Add"/>
+        </div>
+        <div id="divider"></div>
+        <div class="add-box">
+            <h3>Lier une équipe</h3>
+            <label for="nameteam-input">Code equipe : </label><input type="number" name="name" id="code-input">
+            <input type="button" id="link-team-btn" name="addbtn" value="Add"/>
+        </div>
+    </div>
+</div>
+
+<ul class="team-list" id="list-teams">
+</ul>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="teams.js"></script>
+
+</body>
+</html>
