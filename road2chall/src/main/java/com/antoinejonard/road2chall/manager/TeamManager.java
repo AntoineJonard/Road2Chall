@@ -9,6 +9,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Path("team")
 public class TeamManager {
@@ -34,5 +35,13 @@ public class TeamManager {
         List<Team> allUsers = new ArrayList<>();
         teamRepository.findAll().forEach(allUsers::add);
         return allUsers;
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/teamCode/teams/{id}")
+    public String getTeamCode(@PathParam("id") int id){
+        Optional<Team> optUser = teamRepository.findById(id);
+        return optUser.map(Team::getCode).orElse(null);
     }
 }
