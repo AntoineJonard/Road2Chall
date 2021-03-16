@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,8 @@ public class TeamManager {
 
     @Autowired
     TeamRepository teamRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -32,9 +35,9 @@ public class TeamManager {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/allTeams")
     public List<Team> getTeams(){
-        List<Team> allUsers = new ArrayList<>();
-        teamRepository.findAll().forEach(allUsers::add);
-        return allUsers;
+        List<Team> allTeams = new ArrayList<>();
+        teamRepository.findAll().forEach(allTeams::add);
+        return allTeams;
     }
 
     @GET

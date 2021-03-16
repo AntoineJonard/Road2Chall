@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Path("user")
 public class UserManager {
@@ -30,7 +28,7 @@ public class UserManager {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getTeams/users/{id}")
-    public List<Team> getUserTeams(@PathParam("id") int id){
+    public Set<Team> getUserTeams(@PathParam("id") int id){
         Optional<User> optUser = userRepository.findById(id);
         return optUser.map(User::getTeams).orElse(null);
     }
@@ -39,16 +37,15 @@ public class UserManager {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/createUser")
-    public User createUser(UserInput input){
+    public Response createUser(UserInput input){
         List<User> usersWithSameName = userRepository.findByName(input.getName());
         User user;
         if(usersWithSameName.isEmpty())
-            user = new User(input.getName(), input.getPwd(), new ArrayList<>());
+            user = new User(input.getName(), input.getPwd(), new TreeSet<>());
         else
-            return null;
-            //return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+            return Response.status(Response.Status.EXPECTATION_FAILED).build();
         userRepository.save(user);
-        return user;
+        return Response.ok(user).build();
     }
 
     @POST
@@ -68,20 +65,20 @@ public class UserManager {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("addTeam/personnes/{idUser}/teams/{idTeam}")
-    public User addTeam(@PathParam("idUser") Integer idUser,@PathParam("idTeam") Integer idTeam){
+    @Path("addTeam/personnes/{idUser}/teams/{codeTeam}")
+    public Team addTeam(@PathParam("idUser") Integer idUser,@PathParam("codeTeam") String codeTeam){
         Optional<User> optUser = userRepository.findById(idUser);
-        Optional<Team> optTeam = teamRepository.findById(idTeam);
+        List<Team> optTeam = teamRepository.findByCode(codeTeam);
 
         if (optTeam.isEmpty() || optUser.isEmpty())
             return null;
         User user = optUser.get();
-        Team team = optTeam.get();
+        Team team = optTeam.get(0);
 
         user.getTeams().add(team);
 
         userRepository.save(user);
 
-        return  user;
+        return  team;
     }
 }

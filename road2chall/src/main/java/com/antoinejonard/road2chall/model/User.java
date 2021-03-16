@@ -1,7 +1,12 @@
 package com.antoinejonard.road2chall.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User implements Comparable{
@@ -11,18 +16,22 @@ public class User implements Comparable{
     private int id;
     private String name;
     private String pwd;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "owners",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id")
     )
-    private List<Team> teams;
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id",
+            scope = int.class
+    )
+    private Set<Team> teams;
 
     public User() {
     }
 
-    public User(String name, String pwd, List<Team> teams) {
+    public User(String name, String pwd, Set<Team> teams) {
         this.name = name;
         this.pwd = pwd;
         this.teams = teams;
@@ -44,11 +53,11 @@ public class User implements Comparable{
         this.pwd = pwd;
     }
 
-    public List<Team> getTeams() {
+    public Set<Team> getTeams() {
         return teams;
     }
 
-    public void setTeams(List<Team> teams) {
+    public void setTeams(Set<Team> teams) {
         this.teams = teams;
     }
 

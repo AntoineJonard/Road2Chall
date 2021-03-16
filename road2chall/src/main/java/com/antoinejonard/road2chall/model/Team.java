@@ -1,10 +1,14 @@
 package com.antoinejonard.road2chall.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
-public class Team {
+public class Team implements Comparable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,7 +17,11 @@ public class Team {
     private String description;
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> notes;
-    @ManyToMany(mappedBy = "teams", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "teams", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id",
+            scope = int.class
+    )
     private Set<User> owners;
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> members;
@@ -111,5 +119,10 @@ public class Team {
 
     public String generateCode() {
         return String.valueOf(Objects.hash(name, description));
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return getName().compareTo(((Team) o).getName());
     }
 }

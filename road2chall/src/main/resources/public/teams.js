@@ -24,18 +24,41 @@ $(document).ready(function (){
             data: JSON.stringify({ "name": name, "description" : description }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function(data){
-                appendToTeams(data);
+            success: function(teamData){
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/road2Chall/user/addTeam/personnes/"+userId+"/teams/"+teamData.code,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                });
+                appendToTeams(teamData);
             }
         });
-
 
         $('#nameteam-input').val('');
         $('#descriptionteam-input').val('');
         return false;
     });
 
+    $('#link-team-btn').click(function(){
+        var code = $('#code-input').val();
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/road2Chall/user/addTeam/personnes/"+userId+"/teams/"+code,
+            success: function(teamData){
+                if (teamData == null)
+                    alert("Code non reconnu");
+                else
+                    appendToTeams(teamData);
+            }
+        });
+
+        $('#code-input').val('');
+        return false;
+    });
+
     function appendToTeams(item){
-        $('#list-teams').append('<li id="team-'+item.id+'" class="team-item">'+item.name+' - '+item.description+' <button class="remove-team-btn" data-title="Delete" data-toggle="modal" data-target="#delete" > X </button></li>');
+        $('#list-teams').append('<li id="team-'+item.id+'" class="team-item"><div><p id="nom-team">'+item.name+'</p><p id="desc-team">'+item.description+'</p></div> <button class="remove-team-btn" data-title="Delete" data-toggle="modal" data-target="#delete" > X </button></li>');
     }
 })
