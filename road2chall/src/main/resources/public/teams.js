@@ -59,6 +59,16 @@ $(document).ready(function (){
     });
 
     function appendToTeams(item){
-        $('#list-teams').append('<li id="team-'+item.id+'" class="team-item"><div><p id="nom-team">'+item.name+'</p><p id="desc-team">'+item.description+'</p></div> <button class="remove-team-btn" data-title="Delete" data-toggle="modal" data-target="#delete" > X </button></li>');
+        $('#list-teams').append('<li id="team-'+item.id+'" class="team-item"><div><p id="nom-team">'+item.name+'</p><p id="desc-team">'+item.description+'</p><a class="team-link">Plus d\'informations</a></div> <button class="remove-team-btn" data-title="Delete" data-toggle="modal" data-target="#delete" > X </button></li>');
+        resetClickEvent();
+    }
+
+    function resetClickEvent(){
+        $(".team-link").click(function (){
+            let teamId = $(this).closest("li").attr('id');
+            teamId = teamId.replace("team-","");
+            localStorage.setItem('team-id', teamId);
+            window.location.href = "team.html";
+        })
     }
 })

@@ -1,0 +1,82 @@
+/*CSS du container principal*/
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#connexion-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+    width: 100%;
+    background-color: darkcyan;
+    margin: 0;
+}
+
+.divider{
+    margin: 10px;
+    top: 10px;
+    bottom: 10px;
+    border-left: 2px solid grey;
+}
+
+#user-name{
+    color: white;
+    margin: 20px;
+    font-size: large;
+}
+
+#deconnexion-button{
+    margin: 20px;
+}
+
+#choice-bar{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.choice-text{
+    font-size: 1.5em;
+    color: darkcyan;
+}
+
+.selected{
+    text-decoration: underline;
+}
+
+/*CSS de la page informations de l'équipe*/
+
+#informations-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+#team-members{
+    height: 100%;
+    width: 30%;
+    border-right: 2px solid grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#team-notes{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+/*CSS de la page games de l'équipe*/

@@ -101,3 +101,9 @@ h1{
 #des-team{
     font-size: 1em;
 }
+
+a{
+    text-decoration: underline;
+    text-decoration-color: darkblue;
+    color: blue;
+}

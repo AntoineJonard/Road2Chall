@@ -42,6 +42,17 @@ public class TeamManager {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("/teams/{teamId}")
+    public Response getTeam(@PathParam("teamId") Integer teamId){
+        Optional<Team> optionalTeam = teamRepository.findById(teamId);
+
+        if (optionalTeam.isEmpty())
+            return Response.status(Response.Status.NO_CONTENT).build();
+        return Response.ok(optionalTeam.get()).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/teamCode/teams/{id}")
     public String getTeamCode(@PathParam("id") int id){
         Optional<Team> optUser = teamRepository.findById(id);
