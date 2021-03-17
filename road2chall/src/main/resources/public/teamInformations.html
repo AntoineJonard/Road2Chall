@@ -5,13 +5,28 @@
     <link href="team.css" rel="stylesheet">
 </head>
 <body>
-<h2 id="team-name"></h2>
-<div id="informations-container">
-    <div id="team-members">
+<div id="modal" class="invisible">
+    <div id="modal-bar">
+        <img src="close.png" id="close-button">
+        <p id="modal-title">Informations du joueur</p>
+    </div>
+    <div id="modal-content">
 
     </div>
+</div>
+<div id="opaque" class="invisible">
+</div>
+<h1 id="team-name"></h1>
+<div id="informations-container">
+    <div id="team-members">
+        <h2>Membres</h2>
+        <label for="member-input">Nom du joueur : </label><input type="text" name="name" id="member-input">
+        <input type="button" id="add-member" name="addbtn" value="Ajouter"/>
+    </div>
     <div id="team-notes">
-
+        <h2>Notes</h2>
+        <label for="note-input">Nouvelle note : </label><textarea maxlength="300" name="description" id="note-input">Nouvelle note</textarea>
+        <input type="button" id="add-note" name="addbtn" value="Ajouter"/>
     </div>
 </div>
 

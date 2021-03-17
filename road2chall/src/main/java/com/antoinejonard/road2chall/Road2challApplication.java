@@ -11,7 +11,7 @@ public class Road2challApplication {
 		- JPA / Spring data -> Base de donnée
 		- JAX-RS / Jersey -> Webservices
 	lancement BDD :
-		- java -cp hsqldb.jar org.hsqldb.server.Server --database.1 file:road3challdb --dbname.1 road2Chall
+		- java -cp hsqldb.jar org.hsqldb.server.Server --database.1 file:road2challdb --dbname.1 road2Chall
 		- jdbc:hsqldb:hsql://localhost/road2Chall
 	 */
 

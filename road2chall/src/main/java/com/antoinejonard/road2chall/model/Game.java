@@ -13,7 +13,7 @@ public class Game implements Comparable{
     private boolean win;
     private String note;
     @ManyToOne
-    @JoinColumn(name="game_id", nullable=false)
+    @JoinColumn(name="team_id", nullable=false)
     private Team team;
 
     public Game() {

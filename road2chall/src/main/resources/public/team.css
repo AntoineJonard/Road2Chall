@@ -1,8 +1,11 @@
 /*CSS du container principal*/
 
-body{
+body, html{
+    position: relative;
     margin: 0;
     padding: 0;
+    width: 100%;
+    height: 100%;
 }
 
 #connexion-bar{
@@ -51,6 +54,12 @@ body{
 
 /*CSS de la page informations de l'équipe*/
 
+#team-name{
+    width: 100%;
+    text-align: center;
+    margin: 15px;
+}
+
 #informations-container{
     display: flex;
     flex-direction: row;
@@ -67,11 +76,119 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
+}
+
+.member-item{
+    display: flex;
+    flex-direction: row;
+    word-wrap: break-word;
+    justify-content: flex-start;
+    align-items: center;
+    border: 2px solid darkcyan;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 10px;
+    width: 80%;
+}
+
+.member-img{
+    margin-left: 10px;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.member-name{
+    font-size: 1.3em;
+    word-wrap: break-word;
+    width: 75%;
+}
+
+.member-index{
+    font-size: 1em;
+}
+
+.member-infos-container{
+    margin-left: 15px;
+    width: 100%;
 }
 
 #team-notes{
+    width: 70%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.team-note{
+    padding: 10px;
+    border: 2px solid darkcyan;
+    border-radius: 5px;
+    margin: 10px;
+    width: 80%;
+    word-wrap: break-word;
+}
+
+#member-input{
+    width: 60%;
+    margin: 10px;
+}
+
+#note-input{
+    width: 60%;
+    height: 50px;
+    margin: 10px;
+}
+
+#modal {
+    z-index: 10;
+    position: absolute;
+    left: 20%;
+    top: 20%;
+    bottom: 20%;
+    right: 20%;
+    background-color: white;
+    border-radius: 15px;
+    border: 2px solid darkcyan;
+}
+
+#opaque{
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    height: 100%;
+    right: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.33;
+}
+
+.invisible{
+    display: none;
+}
+
+#modal-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px;
+}
+
+#modal-title{
+    margin-left: 40px;
+    font-size: 1.5em;
+}
+
+#close-button{
+    width: 35px;
+    height: 35px;
+}
+
+#modal-content{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

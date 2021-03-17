@@ -1,5 +1,6 @@
 package com.antoinejonard.road2chall;
 
+import com.antoinejonard.road2chall.manager.BackEndCall;
 import com.antoinejonard.road2chall.manager.TeamManager;
 import com.antoinejonard.road2chall.manager.UserManager;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -17,6 +18,7 @@ public class JerseyConfiguration extends ResourceConfig {
     public JerseyConfiguration(){
         register(UserManager.class);
         register(TeamManager.class);
+        register(BackEndCall.class);
         property(ServletProperties.FILTER_FORWARD_ON_404, true);
     }
 }

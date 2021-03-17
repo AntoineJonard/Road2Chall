@@ -43,7 +43,7 @@ public class UserManager {
         if(usersWithSameName.isEmpty())
             user = new User(input.getName(), input.getPwd(), new TreeSet<>());
         else
-            return Response.status(Response.Status.EXPECTATION_FAILED).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         userRepository.save(user);
         return Response.ok(user).build();
     }
