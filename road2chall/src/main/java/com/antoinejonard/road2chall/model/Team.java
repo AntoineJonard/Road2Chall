@@ -26,6 +26,10 @@ public class Team implements Comparable{
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> members;
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id",
+            scope = int.class
+    )
     private Set<Game> games;
     private String code;
 

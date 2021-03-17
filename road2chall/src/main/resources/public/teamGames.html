@@ -6,7 +6,27 @@
 </head>
 <body>
 <h1 id="team-name"></h1>
-
+<div id="game-global-container">
+    <div id="create-game-container">
+        <h3>Ajouter une nouvelle game</h3>
+        <label>Issue du match : </label>
+        <div id="outcome-choice">
+            <div id="victory-choice" class="possible-outcome-choice selected-outcome-choice">
+                <p>Victoire</p>
+                <img src="happy.png" class="outcome-icon">
+            </div>
+            <div id="defeat-choice" class="possible-outcome-choice">
+                <p>Défaite</p>
+                <img src="sad.png" class="outcome-icon">
+            </div>
+        </div>
+        <label for="date-input">Date : </label><input type="date" min="2000-01-01" max="" name="description" id="date-input"/>
+        <label for="note-input">Note concernant la game : </label><textarea maxlength="300" name="description" id="note-input">Note</textarea>
+        <input type="button" id="add-game" name="addbtn" value="Ajouter"/>
+    </div>
+    <div id="games-container">
+    </div>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="teamGames.js"></script>

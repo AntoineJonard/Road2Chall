@@ -1,5 +1,8 @@
 package com.antoinejonard.road2chall.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,17 +12,21 @@ public class Game implements Comparable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private Date date;
+    private String date;
     private boolean win;
     private String note;
-    @ManyToOne
-    @JoinColumn(name="team_id", nullable=false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name="team_id", referencedColumnName = "id",nullable=false)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id",
+            scope = int.class
+    )
     private Team team;
 
     public Game() {
     }
 
-    public Game(Date date, boolean win, String note) {
+    public Game(String date, boolean win, String note) {
         this.date = date;
         this.win = win;
         this.note = note;
@@ -33,11 +40,11 @@ public class Game implements Comparable{
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

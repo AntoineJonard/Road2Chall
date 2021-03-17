@@ -1,5 +1,7 @@
 package com.antoinejonard.road2chall.manager;
 
+import com.antoinejonard.road2chall.model.Game;
+import com.antoinejonard.road2chall.model.Input.GameInput;
 import com.antoinejonard.road2chall.model.Input.MemberInput;
 import com.antoinejonard.road2chall.model.Input.NoteInput;
 import com.antoinejonard.road2chall.model.Input.TeamInput;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +24,8 @@ public class TeamManager {
     TeamRepository teamRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    GameRepository gameRepository;
 
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -95,5 +100,25 @@ public class TeamManager {
         teamRepository.save(team);
 
         return Response.ok(input.getNote()).build();
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/addGame/teams/{teamId}")
+    public Response addGame(@PathParam("teamId") int id, GameInput input) throws ParseException {
+        Optional<Team> optionalTeam = teamRepository.findById(id);
+
+        if (optionalTeam.isEmpty())
+            return Response.status(Response.Status.NOT_FOUND).build();
+
+        Team team = optionalTeam.get();
+
+        Game game = new Game(input.getDate(),input.isWin(), input.getNote());
+
+        game.setTeam(team);
+
+        gameRepository.save(game);
+
+        return Response.ok(game.getId()).build();
     }
 }
