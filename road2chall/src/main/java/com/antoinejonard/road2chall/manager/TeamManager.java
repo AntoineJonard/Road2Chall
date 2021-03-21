@@ -55,7 +55,24 @@ public class TeamManager {
 
         if (optionalTeam.isEmpty())
             return Response.status(Response.Status.NOT_FOUND).build();
-        return Response.ok(optionalTeam.get()).build();
+
+        Team team = optionalTeam.get();
+
+        return Response.ok(team).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/getGames/teams/{teamId}")
+    public Response getTeamGames(@PathParam("teamId") Integer teamId){
+        Optional<Team> optionalTeam = teamRepository.findById(teamId);
+
+        if (optionalTeam.isEmpty())
+            return Response.status(Response.Status.NOT_FOUND).build();
+
+        Team team = optionalTeam.get();
+
+        return Response.ok(team.getGames()).build();
     }
 
     @GET
@@ -104,6 +121,7 @@ public class TeamManager {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/addGame/teams/{teamId}")
     public Response addGame(@PathParam("teamId") int id, GameInput input) throws ParseException {
         Optional<Team> optionalTeam = teamRepository.findById(id);
@@ -119,6 +137,24 @@ public class TeamManager {
 
         gameRepository.save(game);
 
-        return Response.ok(game.getId()).build();
+        return Response.ok(game).build();
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/removeMember/teams/{teamId}")
+    public Response removeMember(@PathParam("teamId") int id, MemberInput input){
+        Optional<Team> optionalTeam = teamRepository.findById(id);
+
+        if (optionalTeam.isEmpty())
+            return Response.status(Response.Status.NOT_FOUND).build();
+
+        Team team = optionalTeam.get();
+
+        team.getMembers().remove(input.getName());
+
+        teamRepository.save(team);
+
+        return Response.ok(input.getName()).build();
     }
 }

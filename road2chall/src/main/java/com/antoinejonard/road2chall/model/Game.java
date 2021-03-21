@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-public class Game implements Comparable{
+public class Game implements Comparable<Game>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -73,7 +75,18 @@ public class Game implements Comparable{
     }
 
     @Override
-    public int compareTo(Object o) {
-        return this.date.compareTo(((Game)o).date);
+    public int compareTo(Game o) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date date1 = null;
+        Date date2 = null;
+        try {
+            date1 = format.parse(this.date);
+            date2 = format.parse(o.date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return -date1.compareTo(date2);
     }
 }

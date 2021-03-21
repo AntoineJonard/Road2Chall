@@ -70,5 +70,21 @@ $(document).ready(function (){
             localStorage.setItem('team-id', teamId);
             window.location.href = "team.html";
         })
+
+        $(".remove-team-btn").click(function (){
+            let teamId = $(this).closest("li").attr('id');
+            teamId = teamId.replace("team-","");
+
+            $.ajax({
+                type: "DELETE",
+                url: "http://localhost:8080/road2Chall/user/removeTeam/personnes/"+userId+"/teams/"+teamId,
+                success: function(teamData){
+                    if (teamData != null)
+                        $('#team-'+teamData.id).remove();
+                    else
+                        alert("Erreur lors du détachement");
+                }
+            });
+        })
     }
 })

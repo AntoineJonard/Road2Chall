@@ -81,4 +81,26 @@ public class UserManager {
 
         return  team;
     }
+
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("removeTeam/personnes/{idUser}/teams/{idTeam}")
+    public  Team removeTeam(@PathParam("idUser") Integer idUser, @PathParam("idTeam") Integer idTeam){
+        Optional<User> optUser = userRepository.findById(idUser);
+        Optional<Team> optTeam = teamRepository.findById(idTeam);
+
+        if (optTeam.isEmpty() || optUser.isEmpty())
+            return null;
+
+        User user = optUser.get();
+        Team team = optTeam.get();
+
+        user.getTeams().removeIf(teamIt -> teamIt.getId()==team.getId());
+
+
+        userRepository.save(user);
+
+        return  team;
+
+    }
 }

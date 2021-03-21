@@ -92,11 +92,18 @@ body, html{
     width: 80%;
 }
 
-.member-img{
+img{
     margin-left: 10px;
     margin-right: 5px;
     width: 30px;
     height: 30px;
+}
+
+a{
+    text-decoration: underline;
+    text-decoration-color: darkblue;
+    color: blue;
+    cursor: pointer;
 }
 
 .member-name{
@@ -195,7 +202,6 @@ body, html{
     align-items: center;
 }
 
-
 /*CSS de la page games de l'équipe*/
 
 #game-global-container{
@@ -207,8 +213,7 @@ body, html{
 
 #games-container{
     height: 100%;
-    width: 65%;
-    margin: 20px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -296,4 +301,25 @@ body, html{
     color: white;
     background-color: darkcyan;
     border: 3px solid black;
+}
+
+#note-input{
+    width: 75%;
+    height: 120px;
+}
+
+#display-more{
+    height: 60px;
+    width: 60px;
+    cursor: pointer;
+}
+
+#button-more-container{
+    height: 100%;
+    width: 65%;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }

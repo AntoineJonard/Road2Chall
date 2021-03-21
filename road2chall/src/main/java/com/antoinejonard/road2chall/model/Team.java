@@ -3,6 +3,8 @@ package com.antoinejonard.road2chall.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.SortNatural;
+import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
 import java.util.*;
@@ -30,21 +32,11 @@ public class Team implements Comparable{
             property = "id",
             scope = int.class
     )
+    @SortNatural
     private Set<Game> games;
     private String code;
 
     public Team() {
-    }
-
-    public Team(int id, String name, String description, Set<String> notes, Set<User> owners, Set<String> members, Set<Game> games, String code) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.notes = notes;
-        this.owners = owners;
-        this.members = members;
-        this.games = games;
-        this.code = code;
     }
 
     public Team(String name, String description) {

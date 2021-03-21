@@ -47,11 +47,11 @@ $(document).ready(function (){
     });
 
     function appendToMembers(name){
-        $("#team-members").append('<div id="member-'+name+'" class="member-item"><img class="member-img" src="member-icon.png"><div class="member-infos-container"><p class="member-name">'+name+'</p><p class="member-index">Joueur '+(memberCpt++)+'</p></div></div>');
-        $(".member-item").click(function (){
+        $("#team-members").append('<div id="member-'+name+'" class="member-item"><img class="member-img" src="member-icon.png"><div class="member-infos-container"><p class="member-name">'+name+'</p><a class="member-more">plus d\'informations</a></div><img src="delete.png" class="remove-member-btn"></div>');
+        $(".member-more").click(function (){
            $("#opaque").toggleClass("invisible");
            $("#modal").toggleClass("invisible");
-           let name = $(this).attr("id").replace("member-","");
+           let name = $(this).closest(".member-item").attr("id").replace("member-","");
            $.ajax({
                type: "GET",
                url: "http://localhost:8080/road2Chall/call/summoner/"+name,
@@ -59,8 +59,6 @@ $(document).ready(function (){
                    $("#modal-content").empty();
                    $("#modal-content").append('<h2>'+name+'</h2>');
                    $.each(stats, function (index, line){
-                       console.log(line);
-                       console.log(line.losses);
                        $("#modal-content").append('<p>'+line.queueType+' : '+line.tier+' '+line.rank+', '+line.leaguePoints+' lp</p>' +
                            '<p> Pourcentage de victoire : '+Math.round((line.wins)/(line.wins+line.losses)*1000)/10+'% ('+line.wins+' wins et '+line.losses+' looses)</p>');
                    });
@@ -70,6 +68,21 @@ $(document).ready(function (){
                        $("#modal-content").append('<p>Service temporairement indisponible ...</p>');
                }
            });
+        });
+        $(".remove-member-btn").click(function (){
+            let memberName = $(this).closest(".member-item").attr("id").replace("member-", "");
+            $.ajax({
+                type: "DELETE",
+                url: "http://localhost:8080/road2Chall/team/removeMember/teams/"+teamId,
+                data: JSON.stringify({"name": memberName}),
+                contentType: "application/json; charset=utf-8",
+                success: function (member){
+                    if (member != null)
+                        $('#member-'+member).remove();
+                    else
+                        alert("Erreur lors de la suppression du membre");
+                }
+            });
         });
     }
 
