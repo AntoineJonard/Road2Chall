@@ -23,7 +23,7 @@ public class BackEndCall {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/summoner/{name}")
-    public Response getTeam(@PathParam("name") String name) throws JsonProcessingException {
+    public Response getSummoner(@PathParam("name") String name) throws JsonProcessingException {
 
         Client client = ClientBuilder.newClient(new ClientConfig());
         WebTarget webTarget = client.target("https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/"
