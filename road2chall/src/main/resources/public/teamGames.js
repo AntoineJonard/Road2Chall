@@ -18,7 +18,9 @@ $(document).ready(function () {
                 }),
                 contentType: "application/json; charset=utf-8",
                 success: function (game){
-                    appendToGame(game);
+                    nbGameDisplayed = 0;
+                    $("#games-container").empty();
+                    displayMoreGames();
                 }
             });
         else
@@ -46,10 +48,10 @@ $(document).ready(function () {
             url: "http://localhost:8080/road2Chall/team/getGames/teams/"+teamId,
             contentType: "application/json; charset=utf-8",
             success: function (games){
-                for (let i = nbGameDisplayed, keys = Object.keys(games), l = keys.length ; i < l && i < nbGameDisplayed+10 ; i++){
+                for (let i = nbGameDisplayed, keys = Object.keys(games), l = keys.length ; i < l && i < nbGameDisplayed+5 ; i++){
                     appendToGame(games[i]);
                 }
-                nbGameDisplayed+=10;
+                nbGameDisplayed+=5;
             }
         });
     }
@@ -60,7 +62,6 @@ $(document).ready(function () {
     }
 
     function appendToGame(game){
-        console.log(game);
         $("#games-container").append('<div id="game-'+game.id+'" class="game-item">' +
             '<img class="game-img" src="battle.png">' +
             '<div class="game-infos-container">' +
