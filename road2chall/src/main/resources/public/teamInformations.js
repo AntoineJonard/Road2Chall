@@ -47,7 +47,8 @@ $(document).ready(function (){
     });
 
     function appendToMembers(name){
-        $("#team-members").append('<div id="member-'+name+'" class="member-item"><img class="member-img" src="member-icon.png"><div class="member-infos-container"><p class="member-name">'+name+'</p><a class="member-more">plus d\'informations</a></div><img src="delete.png" class="remove-member-btn"></div>');
+        $("#team-members").append('<div id="member-'+name+'" class="member-item"><img class="member-img" src="member-icon.png"><div class="member-infos-container"><p class="member-name">'+name+'</p><p class="member-more">plus d\'informations</p></div><img src="delete.png" class="remove-member-btn"></div>');
+        $(".member-more").unbind();
         $(".member-more").click(function (){
            $("#opaque").toggleClass("invisible");
            $("#modal").toggleClass("invisible");
@@ -64,8 +65,10 @@ $(document).ready(function (){
                    });
                },
                error: function (httpObj, textStatus){
-                   if (httpObj.status !== 200)
+                   if (httpObj.status !== 200){
+                       $("#modal-content").empty();
                        $("#modal-content").append('<p>Service temporairement indisponible ...</p>');
+                   }
                }
            });
         });

@@ -59,7 +59,7 @@ $(document).ready(function (){
     });
 
     function appendToTeams(item){
-        $('#list-teams').append('<li id="team-'+item.id+'" class="team-item"><div><p id="nom-team">'+item.name+'</p><p id="desc-team">'+item.description+'</p><a class="team-link">Plus d\'informations</a></div> <button class="remove-team-btn" data-title="Delete" data-toggle="modal" data-target="#delete" > X </button></li>');
+        $('#list-teams').append('<li id="team-'+item.id+'" class="team-item"><div><p id="nom-team">'+item.name+' #'+item.code+'</p><p id="desc-team">'+item.description+'</p><a class="team-link">Plus d\'informations</a></div> <button class="remove-team-btn" data-title="Delete" data-toggle="modal" data-target="#delete" > X </button></li>');
         resetClickEvent();
     }
 

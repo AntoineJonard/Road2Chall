@@ -2,6 +2,8 @@ package com.antoinejonard.road2chall.model.Input;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class SummonerStats {
 
     private String leagueId;
@@ -17,12 +19,13 @@ public class SummonerStats {
     private boolean inactive;
     private boolean freshBlood;
     private boolean hotStreak;
+    private List<BO> miniSeries;
 
     public SummonerStats(){
 
     }
 
-    public SummonerStats(String leagueId, String queueType, String tier, String rank, String summonerId, String summonerName, int leaguePoints, int wins, int losses, boolean veteran, boolean inactive, boolean freshBlood, boolean hotStreak) {
+    public SummonerStats(String leagueId, String queueType, String tier, String rank, String summonerId, String summonerName, int leaguePoints, int wins, int losses, boolean veteran, boolean inactive, boolean freshBlood, boolean hotStreak, List<BO> miniSeries) {
         this.leagueId = leagueId;
         this.queueType = queueType;
         this.tier = tier;
@@ -36,6 +39,7 @@ public class SummonerStats {
         this.inactive = inactive;
         this.freshBlood = freshBlood;
         this.hotStreak = hotStreak;
+        this.miniSeries = miniSeries;
     }
 
     public String getLeagueId() {
@@ -140,5 +144,13 @@ public class SummonerStats {
 
     public void setHotStreak(boolean hotStreak) {
         this.hotStreak = hotStreak;
+    }
+
+    public List<BO> getMiniSeries() {
+        return miniSeries;
+    }
+
+    public void setMiniSeries(List<BO> miniSeries) {
+        this.miniSeries = miniSeries;
     }
 }

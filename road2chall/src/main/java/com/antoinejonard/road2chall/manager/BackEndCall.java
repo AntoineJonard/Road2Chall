@@ -3,6 +3,7 @@ import com.antoinejonard.road2chall.model.Input.Summoner;
 import com.antoinejonard.road2chall.model.Input.SummonerStats;
 import com.antoinejonard.road2chall.model.Input.SummonerStatsList;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import org.glassfish.jersey.client.ClientConfig;
@@ -46,7 +47,9 @@ public class BackEndCall {
         String stringStats = response.readEntity(String.class);
         SummonerStats[] summonerStats;
         try{
-            summonerStats = new ObjectMapper().readValue(stringStats, SummonerStats[].class);
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+            summonerStats = objectMapper.readValue(stringStats, SummonerStats[].class);
         }catch (UnrecognizedPropertyException e){
            return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
         }

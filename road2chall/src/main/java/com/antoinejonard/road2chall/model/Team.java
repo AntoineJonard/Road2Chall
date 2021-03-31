@@ -114,7 +114,7 @@ public class Team implements Comparable{
     }
 
     public String generateCode() {
-        return String.valueOf(Objects.hash(name, description));
+        return String.valueOf(Math.abs(Objects.hash(name, description)));
     }
 
     @Override
