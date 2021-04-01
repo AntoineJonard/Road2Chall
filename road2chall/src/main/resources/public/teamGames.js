@@ -3,9 +3,17 @@ $(document).ready(function () {
 
     let nbGameDisplayed = 0;
 
+    // Boutons de choix de l'issue de la game qui va être ajoutée
     $("#victory-choice").click(switchOutcome);
     $("#defeat-choice").click(switchOutcome);
 
+    // Changement de l'issu de la game a ajouter
+    function switchOutcome(){
+        $("#victory-choice").toggleClass("selected-outcome-choice");
+        $("#defeat-choice").toggleClass("selected-outcome-choice");
+    }
+
+    // Ajout d'une game
     $("#add-game").click(function (){
         if ($("#date-input").val() !== '')
             $.ajax({
@@ -18,6 +26,8 @@ $(document).ready(function () {
                 }),
                 contentType: "application/json; charset=utf-8",
                 success: function (game){
+                    // On remet à 0 le compteur et on recharge toutes les games
+                    // pour éviter l'affichage en double d'une game
                     nbGameDisplayed = 0;
                     $("#games-container").empty();
                     displayMoreGames();
@@ -27,6 +37,7 @@ $(document).ready(function () {
             alert("Date invalide");
     });
 
+    // Affichage du nom de la team
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/road2Chall/team/teams/"+teamId,
@@ -36,6 +47,7 @@ $(document).ready(function () {
         }
     });
 
+    // Affichage des premières games
     displayMoreGames();
 
     $("#display-more").click(function (){
@@ -48,19 +60,20 @@ $(document).ready(function () {
             url: "http://localhost:8080/road2Chall/team/getGames/teams/"+teamId,
             contentType: "application/json; charset=utf-8",
             success: function (games){
-                for (let i = nbGameDisplayed, keys = Object.keys(games), l = keys.length ; i < l && i < nbGameDisplayed+5 ; i++){
+                // Boucle d'ajout de nouvelles games, limité par l'existant pour par a coup de +5
+                for (let i = nbGameDisplayed, keys = Object.keys(games), l = keys.length ;
+                     i < l && i < nbGameDisplayed+5 ;
+                     i++)
+                {
                     appendToGame(games[i]);
                 }
+                // On incrémente pour le prochain ajout de game
                 nbGameDisplayed+=5;
             }
         });
     }
 
-    function switchOutcome(){
-        $("#victory-choice").toggleClass("selected-outcome-choice");
-        $("#defeat-choice").toggleClass("selected-outcome-choice");
-    }
-
+    // Ajout de la game en fonction des attributs
     function appendToGame(game){
         $("#games-container").append('<div id="game-'+game.id+'" class="game-item">' +
             '<img class="game-img" src="battle.png">' +
