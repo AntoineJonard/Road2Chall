@@ -40,6 +40,7 @@ public class UserManager {
     public Response createUser(UserInput input){
         List<User> usersWithSameName = userRepository.findByName(input.getName());
         User user;
+        // On vérifie que le nom est unique
         if(usersWithSameName.isEmpty())
             user = new User(input.getName(), input.getPwd(), new TreeSet<>());
         else
